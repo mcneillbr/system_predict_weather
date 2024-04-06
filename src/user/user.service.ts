@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { DeleteResult, Document } from 'mongodb';
+import { Document } from 'mongodb';
 import { User } from './schemas';
 import { IUserDto, UserDto } from './dto/user.dto';
-import { from, Observable, map, EMPTY } from 'rxjs';
+import { from, Observable, map } from 'rxjs';
 
 function mapUser(user: Document): IUserDto {
   if (!user) {
@@ -28,15 +28,11 @@ export class UserService {
   }
 
   findOne(userName: string): Observable<IUserDto> {
-    return from(this.userModel.findOne({ userName }).exec()).pipe(
-      map(mapUser)
-    );
+    return from(this.userModel.findOne({ userName }).exec()).pipe(map(mapUser));
   }
 
   findAll(): Observable<IUserDto[]> {
-    const users = from(
-      this.userModel.find().exec(),
-    );
+    const users = from(this.userModel.find().exec());
 
     return users.pipe(
       map((users: Document[]) => {
@@ -46,7 +42,7 @@ export class UserService {
   }
 
   async delete(userName: string): Promise<boolean> {
-    const result = await this.userModel.deleteOne({ userName: userName }).exec();
+    const result = await this.userModel.deleteOne({ userName }).exec();
 
     return result.deletedCount > 0;
   }

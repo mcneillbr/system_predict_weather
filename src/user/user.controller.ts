@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, HttpException, HttpStatus } from '@nestjs/common';
+import { IsNotEmpty } from 'class-validator';
+import { Observable, catchError, of } from 'rxjs';
 import { UserService } from './user.service';
 import { IUserDto, UserDto } from './dto/user.dto';
-import { Observable, catchError, of } from 'rxjs';
-import { IsNotEmpty } from 'class-validator';
 
 interface ISuccessResponse {
   success: boolean;
