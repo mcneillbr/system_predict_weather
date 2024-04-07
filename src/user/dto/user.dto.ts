@@ -21,3 +21,12 @@ export class UserDto implements IUserDto {
   @IsNotEmpty()
   readonly password: string;
 }
+
+export class SignInUserDto implements Pick<IUserDto, "userName" | "password"> {
+  @IsNotEmpty()
+  userName: string;
+
+  @IsNotEmpty()
+  password?: string;
+
+}
