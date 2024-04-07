@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, HttpException, HttpStatus, Put } from '@nestjs/common';
 import { Observable, catchError, of } from 'rxjs';
 import { IsNotEmpty } from 'class-validator';
-import { IDeviceDto } from './dto';
+import { DeviceInputDto, IDeviceDto } from './dto';
 import { CiotdService } from './ciotd.service';
 
 class DeviceParams {
@@ -32,7 +32,7 @@ export class CiotdController {
   }
 
   @Post()
-  async create(@Body() device: IDeviceDto): Promise<ISuccessResponse> {
+  async create(@Body() device: DeviceInputDto): Promise<ISuccessResponse> {
     try {
       await this.service.create(device);
       return { success: true };
@@ -46,7 +46,7 @@ export class CiotdController {
   }
 
   @Put(':identifier')
-  async update(@Param() params: DeviceParams, @Body() device: IDeviceDto): Promise<ISuccessResponse> {
+  async update(@Param() params: DeviceParams, @Body() device: DeviceInputDto): Promise<ISuccessResponse> {
     const result = await this.service.update(params.identifier, device);
 
     if (!result) {
