@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { Document } from 'mongodb';
 import { from, Observable, map, EMPTY } from 'rxjs';
 import { Device } from './schemas';
-import { IDeviceDto } from './dto';
+import { DeviceInputDto, IDeviceDto } from './dto';
 
 @Injectable()
 export class CiotdService {
@@ -25,13 +25,13 @@ export class CiotdService {
     }));
   }
 
-  async create(device: IDeviceDto): Promise<Device> {
+  async create(device: DeviceInputDto): Promise<Device> {
     const model = await this.deviceModel.create(device);
 
     return model;
   }
 
-  async update(identifier: string, device: IDeviceDto): Promise<boolean> {
+  async update(identifier: string, device: DeviceInputDto): Promise<boolean> {
     const options = { new: false, upsert: false };
     const filter = { identifier };
 
