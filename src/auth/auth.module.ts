@@ -1,9 +1,16 @@
+import { APP_GUARD } from '@nestjs/core';
 import { Module } from '@nestjs/common';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from 'src/user/user.module';
+import { AuthGuard } from './../common/guards';
+
+const GlobalGuard = {
+  provide: APP_GUARD,
+  useClass: AuthGuard,
+};
 
 @Module({
   imports: [
@@ -19,6 +26,6 @@ import { UserModule } from 'src/user/user.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, GlobalGuard],
 })
 export class AuthModule {}
