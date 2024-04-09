@@ -9,9 +9,12 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CiotdModule } from './ciotd/ciotd.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from './jobs/task.service';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: [`.env`],
@@ -41,6 +44,6 @@ import { CiotdModule } from './ciotd/ciotd.module';
     CiotdModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TasksService],
 })
 export class AppModule {}
