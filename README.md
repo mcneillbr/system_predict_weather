@@ -17,6 +17,9 @@ With detailed information on the intensity of rainfall, farmers can optimize the
 
 IoT sensor data contributes to decision-making in the agricultural industry with a range of benefits that can significantly improve the efficiency, productivity, and resilience of customers in the agricultural sector.
 
+# Application System Design
+
+[About the Design of the Application System](./docs/application-system-design.MD)
 
 ## 🕸️ API Requirements:
 
